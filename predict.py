@@ -39,7 +39,7 @@ class Predictor(BasePredictor):
                                             "person_height",
                                             "person_long_hair",
                                             "person_makeup",
-                                            "person_pale.pt",
+                                            "person_pale",
                                             "person_pierced",
                                             "person_posture",
                                             "person_scarred",
@@ -51,7 +51,7 @@ class Predictor(BasePredictor):
                                             ], default="person_age"),
         prompt_negative: str = Input(default=""),
         seed: int = Input(default=0),
-        # pattern_target: str = Input(default='\\b(man)\\b'),
+        pattern_target: str = Input(default='man'),
         delay_relative: float = Input(default=0.20),
         guidance_scale: float = Input(default=7.5),
         num_images: int = Input(default=5),
@@ -60,7 +60,7 @@ class Predictor(BasePredictor):
         state_dict = torch.load(f'/content/attribute-control/pretrained_deltas/{pretrained_deltas}.pt')
         delta.load_state_dict(state_dict['delta'])
         delta = delta.to(DEVICE)
-        pattern_target = r'\b(person)\b'
+        pattern_target = r'\b({})\b'.format(pattern_target)
         scales = np.linspace(-2, 2, num=num_images)
         characterwise_mask = get_mask_regex(prompt, pattern_target)
         emb = self.model.embed_prompt(prompt)
