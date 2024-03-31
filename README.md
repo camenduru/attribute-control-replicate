@@ -15,7 +15,7 @@ https://arxiv.org/abs/2403.17064
 https://compvis.github.io/attribute-control/
 
 ### 🖼 Output
-
+![image](https://github.com/camenduru/attribute-control-replicate/assets/54370274/e32c771e-7827-4155-939e-1c7ee0a57662)
 
 ### 🏢 Sponsor
 https://replicate.com

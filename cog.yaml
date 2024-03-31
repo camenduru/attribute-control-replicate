@@ -1,0 +1,12 @@
+build:
+  gpu: false
+  python_version: "3.10"
+  run:
+    - apt update -y && apt install -y software-properties-common python3-launchpadlib && apt update -y && add-apt-repository -y ppa:git-core/ppa && apt update -y
+    - apt install -y gcc g++ aria2 git git-lfs wget libgl1 libglib2.0-0 ffmpeg cmake libgtk2.0-0 libopenmpi-dev unzip
+    - wget https://developer.download.nvidia.com/compute/cuda/12.1.0/local_installers/cuda_12.1.0_530.30.02_linux.run && sh cuda_12.1.0_530.30.02_linux.run --silent --toolkit
+    - pip install -q torch==2.2.1+cu121 torchvision==0.17.1+cu121 torchaudio==2.2.1+cu121 torchtext==0.17.1 torchdata==0.7.1 --extra-index-url https://download.pytorch.org/whl/cu121 -U
+    - sed -i 's/return caster.operator typename make_caster<T>::template cast_op_type<T>();/return caster;/' /usr/local/lib/python3.10/site-packages/torch/include/pybind11/cast.h
+    - pip install notebook pyngrok pickleshare ipywidgets opencv-python accelerate diffusers>=0.25 einops hydra-core jaxtyping matplotlib matplotlib numpy omegaconf Pillow tqdm transformers
+    - GIT_LFS_SKIP_SMUDGE=1 git clone -b dev https://github.com/camenduru/attribute-control /content/attribute-control
+predict: "/src/predict.py:Predictor"
