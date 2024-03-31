@@ -28,6 +28,7 @@ class Predictor(BasePredictor):
     def predict(
         self,
         prompt: str = Input(default="a photo of a beautiful man"),
+        pattern_target: str = Input(default='man'),
         pretrained_deltas: str = Input(choices=["person_age",
                                             "person_bald",
                                             "person_colorful_outfit",
@@ -51,7 +52,6 @@ class Predictor(BasePredictor):
                                             ], default="person_age"),
         prompt_negative: str = Input(default=""),
         seed: int = Input(default=0),
-        pattern_target: str = Input(default='man'),
         delay_relative: float = Input(default=0.20),
         guidance_scale: float = Input(default=7.5),
         num_images: int = Input(default=5),
